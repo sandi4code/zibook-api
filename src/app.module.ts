@@ -6,12 +6,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
+import { BalanceModule } from './modules/balance/balance.module';
 import { UsersModule } from './modules/users/users.module';
 import config from './config/config';
 import { User } from './modules/users/user.entity';
 
 @Module({
   imports: [
+    BalanceModule,
     ConfigModule.forRoot({
       load: [config]
     }),
@@ -34,7 +36,9 @@ import { User } from './modules/users/user.entity';
     AuthModule,
     UsersModule
   ],
-  controllers: [AppController],
+  controllers: [
+    AppController,
+  ],
   providers: [
     AppService,
     {
@@ -43,4 +47,4 @@ import { User } from './modules/users/user.entity';
     }
   ],
 })
-export class AppModule {}
+export class AppModule { }

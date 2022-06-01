@@ -10,7 +10,16 @@ export class UsersService {
     private usersRepository: Repository<User>
   ) {}
 
-  async findOne(email: string): Promise<User> {
-    return this.usersRepository.findOne({ email: email });
+  async findOne(phone: string): Promise<User> {
+    return this.usersRepository.findOne({ phone: phone });
+  }
+
+  async create(data: any): Promise<User> {
+    let user = new User();
+    user.name = data.name;
+    user.email = data.email;
+    user.phone = data.phone;
+    user.password = data.password;
+    return await this.usersRepository.save(user);
   }
 }
