@@ -7,13 +7,17 @@ import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
 import { BalanceModule } from './modules/balance/balance.module';
+import { CategoryModule } from './modules/category/category.module';
+import { TransactionModule } from './modules/transaction/transaction.module';
 import { UsersModule } from './modules/users/users.module';
-import config from './config/config';
+import { Balance } from './modules/balance/balance.entity';
+import { Category } from './modules/category/category.entity';
+import { Transaction } from './modules/transaction/transaction.entity';
 import { User } from './modules/users/user.entity';
+import config from './config/config';
 
 @Module({
   imports: [
-    BalanceModule,
     ConfigModule.forRoot({
       load: [config]
     }),
@@ -26,7 +30,7 @@ import { User } from './modules/users/user.entity';
         username: config.get('db.user'),
         password: config.get('db.pass'),
         database: config.get('db.name'),
-        entities: [User],
+        entities: [User, Balance, Category, Transaction],
         synchronize: false,
         timezone: "+07:00",
         // debug: (config.get('environment') == 'local') ? true : false,
@@ -34,6 +38,9 @@ import { User } from './modules/users/user.entity';
       inject: [ConfigService],
     }),
     AuthModule,
+    BalanceModule,
+    CategoryModule,
+    TransactionModule,
     UsersModule
   ],
   controllers: [

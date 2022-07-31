@@ -10,6 +10,10 @@ export class UsersService {
     private usersRepository: Repository<User>
   ) {}
 
+  async findById(id: number): Promise<User> {
+    return this.usersRepository.findOne(id);
+  }
+
   async findOne(phone: string): Promise<User> {
     return this.usersRepository.findOne({ phone: phone });
   }

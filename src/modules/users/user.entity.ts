@@ -18,6 +18,9 @@ export class User {
   password: string;
 
   @Column()
+  balance: number;
+
+  @Column()
   status: string;
 
   @CreateDateColumn({ default: null })
